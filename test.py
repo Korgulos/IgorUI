@@ -13,4 +13,4 @@ for i in range(9):
             break
 
     print(dt)  # 👉️ 2023-11-24 09:30:00.000123
-    print(f"{result} more {d} seconds")  # 👉️ 2023-11-24 09:59:00.000123
+    print(f"{result} more {d} seconds")

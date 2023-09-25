@@ -1,3 +1,5 @@
+import random
+import sys
 from Colors import colors
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy, QLabel
 from PySide6.QtCore import Qt
@@ -27,7 +29,12 @@ class RocWidget(QWidget):
 
         for color in colors:
             button = QPushButton(color.color_name)
-            button.setStyleSheet(color.color_color)
+            button.setStyleSheet(f"{color.color_color}; font: bold 34px; border-color: rgb(50, 50, 50);"
+                                 f" border: 1px solid;")
+            if color.color_name == "Crna" or color.color_name == "Plava":
+                button.setStyleSheet(f"{color.color_color}; "
+                                     f"font: bold 34px; border-color: rgb(200, 200, 200);"
+                                     f" border: 1px solid; color: rgb(200, 200, 200);")
             button.pressed.connect(
                 lambda val=color.color_id: button_clicked(self.button_pressed(val), self.rando)
             )
@@ -46,3 +53,15 @@ class RocWidget(QWidget):
     def button_pressed(self, n):
         self.label.setText(f"Boja {colors[n-1].color_name} nije boja {colors[self.rando-1].color_name}")
         return n
+
+
+if __name__ == "__main__":
+
+    rand_int = random.randint(1, 8)
+    app = QApplication(sys.argv)
+    window = RocWidget(rand_int)
+    window.showMaximized()
+    window.setWindowFlag(Qt.FramelessWindowHint, True)
+    window.setWindowFlag(Qt.WindowStaysOnTopHint, True)
+    window.show()
+    app.exec()
